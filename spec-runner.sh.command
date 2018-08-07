@@ -6,7 +6,7 @@
 
 projectHome=$(cd $(dirname $0); pwd)
 
-info() {
+setupTools() {
    # Check for Node.js installation and download project dependencies
    cd $projectHome
    pwd
@@ -41,12 +41,20 @@ showVersions() {
    echo
    }
 
+runSpecs() {
+   cd $projectHome
+   npm test
+   echo
+   node read-me-example.js
+   echo "Try it out:"
+   echo "   cd $projectHome"
+   echo "   node read-me-example.js"
+   echo
+   }
+
 echo
 echo "node-fetch-json"
 echo "==============="
-info
+setupTools
 showVersions
-npm test
-echo
-node read-me-example.js
-echo
+runSpecs

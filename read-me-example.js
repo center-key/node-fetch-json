@@ -1,9 +1,11 @@
 // node read-me-example.js
 
+const url =  'https://httpbin.org/post';
+const data = { action: 'fetch', animal: 'dog' };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function oldWay() {
    const fetch = require('node-fetch');
-   const data = { animal: 'dog', action: 'fetch' };
    const options = {
       method: 'POST',
       headers: {
@@ -12,27 +14,27 @@ function oldWay() {
          },
       body: JSON.stringify(data)
       };
-   function handleJson(data) {
-      console.log(data.origin, data.json);
+   function handleJson(reponse) {
+      console.log('OLD: node-fetch -->     ', reponse.origin, reponse.json);
       }
-   fetch('https://httpbin.org/post', options)
+   fetch(url, options)
       .then(response => response.json())
       .then(handleJson)
-      .catch(console.log);
+      .catch(console.error);
    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function newWay() {
    const fetchJson = require('./node-fetch-json.js');
-   const data = { animal: 'dog', action: 'fetch' };
-   function handleJson(data) {
-      console.log(data.origin, data.json);
+   function handleJson(reponse) {
+      console.log('NEW: node-fetch-json -->', reponse.origin, reponse.json);
       }
-   fetchJson('https://httpbin.org/post', { method: 'POST', body: data })
+   fetchJson(url, { method: 'POST', body: data })
       .then(handleJson)
-      .catch(console.log);
+      .catch(console.error);
    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+console.log('POST', url, data);
 oldWay();
 newWay();
