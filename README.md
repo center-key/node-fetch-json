@@ -1,5 +1,5 @@
 # node-fetch-json
-_A very thin wrapper around node-fetch just for JSON_
+_A thin wrapper around node-fetch just for JSON_
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/node-fetch-json/blob/master/LICENSE.txt)
 &nbsp;
@@ -9,7 +9,7 @@ _A very thin wrapper around node-fetch just for JSON_
 &nbsp;
 [![Build Status](https://travis-ci.org/center-key/node-fetch-json.svg)](https://travis-ci.org/center-key/node-fetch-json)
 
-Why would you fetch anything but JSON? ;)
+Why would you fetch anything but json? ;)
 
 ### A) Setup
 Install with the command:
@@ -67,8 +67,12 @@ The **node-fetch-json** module:
 1. Automatically runs `.json()` on the response from the promise.
 
 The format for using **node-fetch-json** is:
+#### GET
 ```javascript
 fetchJson.get(url[, options]).then(callback);
+```
+#### POST
+```javascript
 fetchJson.post(url, body[, options]).then(callback);
 ```
 The `options` parameter is passed through to **node-fetch**.

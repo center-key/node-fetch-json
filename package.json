@@ -1,7 +1,7 @@
 {
    "name": "node-fetch-json",
-   "description": "A very thin wrapper around node-fetch just for JSON",
-   "version": "0.0.4",
+   "description": "A thin wrapper around node-fetch just for JSON",
+   "version": "0.1.0",
    "license": "MIT",
    "main": "node-fetch-json.js",
    "repository": "center-key/node-fetch-json",
@@ -10,10 +10,13 @@
    "docs": "https://github.com/center-key/node-fetch-json/blob/master/README.md",
    "keywords": [
       "fetch",
+      "get",
+      "http",
       "javascript",
       "json",
-      "node",
       "node-fetch",
+      "nodejs",
+      "post",
       "rest"
    ],
    "author": {
