@@ -17,6 +17,15 @@ const nodeFetchJson = {
       },
    post: function(url, data, options) {
       return nodeFetchJson.request('POST', url, data, options);
+      },
+   put: function(url, data, options) {
+      return nodeFetchJson.request('PUT', url, data, options);
+      },
+   patch: function(url, data, options) {
+      return nodeFetchJson.request('PATCH', url, data, options);
+      },
+   delete: function(url, data, options) {
+      return nodeFetchJson.request('DELETE', url, data, options);
       }
    };
 

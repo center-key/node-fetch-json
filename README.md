@@ -14,7 +14,7 @@ Why would you fetch anything but json? ;)
 ### A) Setup
 Install with the command:
 ```shell
-$ npm install node-fetch-json --save
+$ npm install node-fetch-json
 ```
 Then import with the line:
 ```javascript
@@ -24,7 +24,7 @@ const fetchJson = require('node-fetch-json');
 ### B) Usage
 **node-fetch-json** depends on and calls **[node-fetch](https://www.npmjs.com/package/node-fetch)**.
 
-#### 1. The low-level way
+#### 1. The existing low-level way
 **node-fetch** enables you to send and receive JSON at a REST endpoint using:
 ```javascript
 const fetch = require('node-fetch');
@@ -45,7 +45,7 @@ fetch('https://httpbin.org/post', options)
    .catch(console.error);
 ```
 
-#### 2. A more concise way
+#### 2. A new more concise way
 With **node-fetch-json**, the above becomes:
 ```javascript
 const fetchJson = require('node-fetch-json');
@@ -75,7 +75,19 @@ fetchJson.get(url[, options]).then(callback);
 ```javascript
 fetchJson.post(url, body[, options]).then(callback);
 ```
-The `options` parameter is passed through to **node-fetch**.
+#### PUT
+```javascript
+fetchJson.put(url, body[, options]).then(callback);
+```
+#### PATCH
+```javascript
+fetchJson.patch(url, body[, options]).then(callback);
+```
+#### DELETE
+```javascript
+fetchJson.delete(url, body[, options]).then(callback);
+```
+The optional `options` parameter is passed through to **node-fetch**.
 See the documentation for the **[node-fetch](https://www.npmjs.com/package/node-fetch)** project.
 
 ### D) Questions or enhancements
