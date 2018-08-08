@@ -1,7 +1,8 @@
-// node read-me-example.js
-
-const url =  'https://httpbin.org/post';
-const data = { action: 'fetch', animal: 'dog' };
+// Run program:
+//    $ node read-me-example.js
+//    POST https://httpbin.org/post { action: 'fetch', animal: 'dog' }
+//    OLD: node-fetch -->      107.199.205.61 { action: 'fetch', animal: 'dog' }
+//    NEW: node-fetch-json --> 107.199.205.61 { action: 'fetch', animal: 'dog' }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function oldWay() {
@@ -12,29 +13,32 @@ function oldWay() {
          'Content-Type': 'application/json',
          'Accept': 'application/json'
          },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ action: 'fetch', animal: 'dog' })
       };
-   function handleJson(reponse) {
-      console.log('OLD: node-fetch -->     ', reponse.origin, reponse.json);
+   function handleData(data) {
+      console.log('OLD: node-fetch -->     ', data.origin, data.json);
+      // console.log(data);
       }
-   fetch(url, options)
+   fetch('https://httpbin.org/post', options)
       .then(response => response.json())
-      .then(handleJson)
+      .then(handleData)
       .catch(console.error);
    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function newWay() {
    const fetchJson = require('./node-fetch-json.js');
-   function handleJson(reponse) {
-      console.log('NEW: node-fetch-json -->', reponse.origin, reponse.json);
+   // const fetchJson = require('node-fetch-json');
+   function handleData(data) {
+      console.log('NEW: node-fetch-json -->', data.origin, data.json);
+      // console.log(data);
       }
-   fetchJson(url, { method: 'POST', body: data })
-      .then(handleJson)
+   fetchJson.post('https://httpbin.org/post', { action: 'fetch', animal: 'dog' })
+      .then(handleData)
       .catch(console.error);
    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-console.log('POST', url, data);
+console.log('POST', 'https://httpbin.org/post', { action: 'fetch', animal: 'dog' });
 oldWay();
 newWay();

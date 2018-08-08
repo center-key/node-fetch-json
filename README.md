@@ -9,7 +9,7 @@ _A very thin wrapper around node-fetch just for JSON_
 &nbsp;
 [![Build Status](https://travis-ci.org/center-key/node-fetch-json.svg)](https://travis-ci.org/center-key/node-fetch-json)
 
-Why would you fetch anything but json? ;)
+Why would you fetch anything but JSON? ;)
 
 ### A) Setup
 Install with the command:
@@ -28,52 +28,50 @@ const fetchJson = require('node-fetch-json');
 **node-fetch** enables you to send and receive JSON at a REST endpoint using:
 ```javascript
 const fetch = require('node-fetch');
-const data = { animal: 'dog', action: 'fetch' };
 const options = {
    method: 'POST',
    headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
       },
-   body: JSON.stringify(data)
+   body: JSON.stringify({ action: 'fetch', animal: 'dog' })
    };
-function handleJson(data) {
-   console.log(data.origin, data.json);
+function handleData(data) {
+   console.log(data);
    }
 fetch('https://httpbin.org/post', options)
    .then(response => response.json())
-   .then(handleJson)
-   .catch(console.log);
+   .then(handleData)
+   .catch(console.error);
 ```
 
 #### 2. A more concise way
 With **node-fetch-json**, the above becomes:
 ```javascript
 const fetchJson = require('node-fetch-json');
-const data = { animal: 'dog', action: 'fetch' };
-function handleJson(data) {
-   console.log(data.origin, data.json);
+function handleData(data) {
+   console.log(data);
    }
-fetchJson('https://httpbin.org/post', { method: 'POST', body: data })
-   .then(handleJson)
-   .catch(console.log);
+fetchJson.post('https://httpbin.org/post', { action: 'fetch', animal: 'dog' })
+   .then(handleData)
+   .catch(console.error);
 ```
 
-#### 3. Same result
-Both examples produce output that looks like:<br>
-**`203.0.113.254 { action: 'fetch', animal: 'dog' }`**
+#### 3. Equivalent results
+The two examples produce the same output.
 
 ### C) Details
 The **node-fetch-json** module:
 1. Automatically adds the JSON data type (`'application/json'`) to the HTTP headers.
 1. Automatically serializes the body payload with `JSON.stringify()`.
-1. Automatically runs `.json()` on the response promise.
+1. Automatically runs `.json()` on the response from the promise.
 
 The format for using **node-fetch-json** is:
 ```javascript
-fetchJson(url[, options])
+fetchJson.get(url[, options]).then(callback);
+fetchJson.post(url, body[, options]).then(callback);
 ```
-The `url` and `options` parameters are passed through to **node-fetch**.
+The `options` parameter is passed through to **node-fetch**.
 See the documentation for the **[node-fetch](https://www.npmjs.com/package/node-fetch)** project.
 
 ### D) Questions or enhancements

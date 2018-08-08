@@ -46,9 +46,10 @@ runSpecs() {
    npm test
    echo
    node read-me-example.js
+   echo
    echo "Try it out:"
-   echo "   cd $projectHome"
-   echo "   node read-me-example.js"
+   echo "   $ cd $projectHome"
+   echo "   $ node read-me-example.js"
    echo
    }
 

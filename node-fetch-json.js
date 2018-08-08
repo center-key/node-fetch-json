@@ -1,11 +1,23 @@
+// node-fetch-json ~~ MIT License
+
 const fetch = require('node-fetch');
 
-module.exports = (url, options) => {
-   options = Object.assign({}, options);
-   const jsonHeaders = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
-   options.headers = Object.assign(jsonHeaders, options.headers);
-   if (options.body)
-      options.body = JSON.stringify(options.body);
-   function toJson(response) { return response.json(); }
-   return fetch(url, options).then(toJson);
+const nodeFetchJson = {
+   request: function(method, url, data, options) {
+      options = Object.assign({ method: method }, options);
+      const jsonHeaders = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
+      options.headers = Object.assign(jsonHeaders, options.headers);
+      if (data)
+         options.body = JSON.stringify(data);
+      function toJson(response) { return response.json(); }
+      return fetch(url, options).then(toJson);
+      },
+   get: function(url, options) {
+      return nodeFetchJson.request('GET', url, null, options);
+      },
+   post: function(url, data, options) {
+      return nodeFetchJson.request('POST', url, data, options);
+      }
    };
+
+module.exports = nodeFetchJson;
