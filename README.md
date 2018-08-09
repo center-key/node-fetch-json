@@ -24,7 +24,7 @@ const fetchJson = require('node-fetch-json');
 ### B) Usage
 **node-fetch-json** depends on and calls **[node-fetch](https://www.npmjs.com/package/node-fetch)**.
 
-#### 1. The existing low-level way
+#### 1. Existing low-level approach (node-fetch)
 **node-fetch** enables you to send and receive JSON at a REST endpoint using:
 ```javascript
 const fetch = require('node-fetch');
@@ -45,7 +45,7 @@ fetch('https://httpbin.org/post', options)
    .catch(console.error);
 ```
 
-#### 2. A new more concise way
+#### 2. New more concise approach (node-fetch-json)
 With **node-fetch-json**, the above becomes:
 ```javascript
 const fetchJson = require('node-fetch-json');
@@ -61,34 +61,38 @@ fetchJson.post('https://httpbin.org/post', { action: 'fetch', animal: 'dog' })
 The two examples produce the same output.
 
 ### C) Details
-The **node-fetch-json** module:
-1. Automatically adds the JSON data type (`'application/json'`) to the HTTP headers.
-1. Automatically serializes the body payload with `JSON.stringify()`.
-1. Automatically runs `.json()` on the response from the promise.
+The **node-fetch-json** module automatically:
+1. Serializes the body payload with `JSON.stringify()`.
+1. Adds the JSON data type (`'application/json'`) to the HTTP headers.
+1. Builds the HTTP query string from the `params` object for GET requests.
+1. Runs `.json()` on the response from the promise.
 
 The format for using **node-fetch-json** is:
 #### GET
 ```javascript
-fetchJson.get(url[, options]).then(callback);
+fetchJson.get(url, params, options).then(callback);
 ```
 #### POST
 ```javascript
-fetchJson.post(url, body[, options]).then(callback);
+fetchJson.post(url, resource, options]).then(callback);
 ```
 #### PUT
 ```javascript
-fetchJson.put(url, body[, options]).then(callback);
+fetchJson.put(url, resource, options).then(callback);
 ```
 #### PATCH
 ```javascript
-fetchJson.patch(url, body[, options]).then(callback);
+fetchJson.patch(url, resource, options).then(callback);
 ```
 #### DELETE
 ```javascript
-fetchJson.delete(url, body[, options]).then(callback);
+fetchJson.delete(url, resource, options).then(callback);
 ```
-The optional `options` parameter is passed through to **node-fetch**.
-See the documentation for the **[node-fetch](https://www.npmjs.com/package/node-fetch)** project.
+Notes:
+1. Only the `url` parameter is required.&nbsp;  The other parameters are optional.
+1. The `params` object for `fetchJson.get()` is converted into a query string and appended to the `url`.
+1. The `resource` object is turned into the body of the HTTP request.
+1. The `options` parameter is passed through to **node-fetch** (see the **node-fetch** documentation for supported **[options](https://www.npmjs.com/package/node-fetch#options)**).
 
 ### D) Questions or enhancements
 Feel free to submit an [issue](https://github.com/center-key/node-fetch-json/issues).

@@ -37,6 +37,57 @@ describe('fetchJson.get() response from GETing books about "JSON" from Google Bo
    });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+describe('GET response returned by httpbin.org', () => {
+
+   it('contains empty params when none are supplied', (done) => {
+      const url = 'https://httpbin.org/get';
+      function handleData(data) {
+         const actual =   data.args;
+         const expected = { };
+         assert.deepEqual(actual, expected);
+         done();
+         }
+      fetchJson.get(url).then(handleData);
+      });
+
+   it('contains the params from the URL query string', (done) => {
+      const url = 'https://httpbin.org/get?planet=Jupiter&max=3';
+      function handleData(data) {
+         const actual =   data.args;
+         const expected = { planet: 'Jupiter', max: '3' };
+         assert.deepEqual(actual, expected);
+         done();
+         }
+      fetchJson.get(url).then(handleData);
+      });
+
+   it('contains the params from an object', (done) => {
+      const url = 'https://httpbin.org/get';
+      const parms = { planet: 'Jupiter', max: 3 };
+      function handleData(data) {
+         const actual =   data.args;
+         const expected = { planet: 'Jupiter', max: '3' };
+         assert.deepEqual(actual, expected);
+         done();
+         }
+      fetchJson.get(url, parms).then(handleData);
+      });
+
+   it('contains the params from both the URL query string and an object', (done) => {
+      const url = 'https://httpbin.org/get?sort=diameter';
+      const parms = { planet: 'Jupiter', max: 3 };
+      function handleData(data) {
+         const actual =   data.args;
+         const expected = { sort: 'diameter', planet: 'Jupiter', max: '3' };
+         assert.deepEqual(actual, expected);
+         done();
+         }
+      fetchJson.get(url, parms).then(handleData);
+      });
+
+   });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('Response returned by httpbin.org for a planet (object literal)', () => {
 
    it('from a POST contains the planet (JSON)', (done) => {
