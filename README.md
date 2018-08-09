@@ -21,23 +21,50 @@ Then import with the line:
 const fetchJson = require('node-fetch-json');
 ```
 
-### B) Usage
+### B) Examples
+
+#### HTTP GET
+Fetch the NASA Astronomy Picture of the Day:
+```javascript
+const fetchJson = require('node-fetch-json');
+const url =       'https://api.nasa.gov/planetary/apod';
+const params =    { api_key: 'DEMO_KEY' };
+function handleData(data) {
+   console.log('The NASA APOD for today is at: ' + data.url);
+   }
+fetchJson.get(url, params).then(handleData);
+```
+#### HTTP POST
+Create a resource for the planet Jupiter:
+```javascript
+const fetchJson = require('node-fetch-json');
+const resource =  { name: 'Jupiter', position: 5 };
+function handleData(data) {
+   console.log(data);  //HTTP response body as an object literal
+   }
+fetchJson.post('https://httpbin.org/post', resource)
+   .then(handleData)
+   .catch(console.error);
+```
+
+### C) Leverages node-fetch
+
 **node-fetch-json** depends on and calls **[node-fetch](https://www.npmjs.com/package/node-fetch)**.
 
-#### 1. Existing low-level approach (node-fetch)
-**node-fetch** enables you to send and receive JSON at a REST endpoint using:
+For comparison, the above POST example to create a planet would be done directly using **node-fetch** with the code:
 ```javascript
-const fetch = require('node-fetch');
+const fetch =    require('node-fetch');
+const resource = { name: 'Jupiter', position: 5 };
 const options = {
    method: 'POST',
    headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
       },
-   body: JSON.stringify({ action: 'fetch', animal: 'dog' })
+   body: JSON.stringify(resource)
    };
 function handleData(data) {
-   console.log(data);
+   console.log(data);  //HTTP response body as an object literal
    }
 fetch('https://httpbin.org/post', options)
    .then(response => response.json())
@@ -45,26 +72,13 @@ fetch('https://httpbin.org/post', options)
    .catch(console.error);
 ```
 
-#### 2. New more concise approach (node-fetch-json)
-With **node-fetch-json**, the above becomes:
-```javascript
-const fetchJson = require('node-fetch-json');
-function handleData(data) {
-   console.log(data);
-   }
-fetchJson.post('https://httpbin.org/post', { action: 'fetch', animal: 'dog' })
-   .then(handleData)
-   .catch(console.error);
-```
+The examples for **node-fetch-json** and **node-fetch** each produce the same output.
 
-#### 3. Equivalent results
-The two examples produce the same output.
-
-### C) Details
+### D) Details
 The **node-fetch-json** module automatically:
 1. Serializes the body payload with `JSON.stringify()`.
 1. Adds the JSON data type (`'application/json'`) to the HTTP headers.
-1. Builds the HTTP query string from the `params` object for GET requests.
+1. Builds the URL query string from the `params` object for GET requests.
 1. Runs `.json()` on the response from the promise.
 
 The format for using **node-fetch-json** is:
@@ -94,7 +108,7 @@ Notes:
 1. The `resource` object is turned into the body of the HTTP request.
 1. The `options` parameter is passed through to **node-fetch** (see the **node-fetch** documentation for supported **[options](https://www.npmjs.com/package/node-fetch#options)**).
 
-### D) Questions or enhancements
+### E) Questions or enhancements
 Feel free to submit an [issue](https://github.com/center-key/node-fetch-json/issues).
 
 ---

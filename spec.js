@@ -21,17 +21,35 @@ describe('Module node-fetch-json', () => {
    });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-describe('fetchJson.get() response from GETing books about "JSON" from Google Books API', () => {
+describe('Google Books API search result for "spacex" fetched by fetchJson.get()', () => {
 
-   it('has the correct "kind" set', (done) => {
-      const url = 'https://www.googleapis.com/books/v1/volumes?q=json';
+   it('contains the correct "kind" value and "totalItems" as an number', (done) => {
+      const url = 'https://www.googleapis.com/books/v1/volumes?q=spacex';
       function handleData(data) {
-         const actual =   { kind: data.kind };
-         const expected = { kind: 'books#volumes' };
+         const actual =   { total: typeof data.totalItems, kind: data.kind };
+         const expected = { total: 'number',               kind: 'books#volumes' };
          assert.deepEqual(actual, expected);
          done();
          }
       fetchJson.get(url).then(handleData);
+      });
+
+   });
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+describe('NASA Astronomy Picture of the Day resource fetched by fetchJson.get()', () => {
+
+   it('contains an image with a URL', (done) => {
+      const url = 'https://api.nasa.gov/planetary/apod';
+      const params = { api_key: 'DEMO_KEY' };
+      function handleData(data) {
+         const actual =   { media: data.media_type, url: !!data.url };
+         const expected = { media: 'image',         url: true };
+         assert.deepEqual(actual, expected);
+         done();
+         }
+      fetchJson.get(url, params).then(handleData);
       });
 
    });
@@ -128,7 +146,7 @@ describe('Response returned by httpbin.org for a planet (object literal)', () =>
 
    it('from a DELETE contains the planet (JSON)', (done) => {
       const url = 'https://httpbin.org/delete';
-      const resource = { position: 5, name: 'Jupiter' };
+      const resource = { name: 'Jupiter', position: 5 };
       function handleData(data) {
          const actual =   { planet: data.json, type: typeof data.json };
          const expected = { planet: resource,  type: 'object' };
