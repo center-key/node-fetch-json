@@ -26,6 +26,7 @@ const fetchJson = require('node-fetch-json');
 #### HTTP GET
 Fetch the NASA Astronomy Picture of the Day:
 ```javascript
+// NASA
 const fetchJson = require('node-fetch-json');
 const url =       'https://api.nasa.gov/planetary/apod';
 const params =    { api_key: 'DEMO_KEY' };
@@ -37,6 +38,7 @@ fetchJson.get(url, params).then(handleData);
 #### HTTP POST
 Create a resource for the planet Jupiter:
 ```javascript
+// Jupiter
 const fetchJson = require('node-fetch-json');
 const resource =  { name: 'Jupiter', position: 5 };
 function handleData(data) {
@@ -53,6 +55,7 @@ fetchJson.post('https://httpbin.org/post', resource)
 
 For comparison, the above POST example to create a planet would be done directly using **node-fetch** with the code:
 ```javascript
+// Jupiter
 const fetch =    require('node-fetch');
 const resource = { name: 'Jupiter', position: 5 };
 const options = {

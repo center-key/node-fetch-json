@@ -6,6 +6,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function oldWay() {
+   // Jupiter
    const fetch =    require('node-fetch');
    const resource = { name: 'Jupiter', position: 5 };
    const options = {
@@ -28,6 +29,7 @@ function oldWay() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function newWay() {
+   // Jupiter
    const fetchJson = require('./node-fetch-json.js');
    // const fetchJson = require('node-fetch-json');
    const resource =  { name: 'Jupiter', position: 5 };
