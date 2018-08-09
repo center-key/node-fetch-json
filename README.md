@@ -1,4 +1,6 @@
 # node-fetch-json
+<img src=https://raw.githubusercontent.com/center-key/node-fetch-json/master/logos.png
+   align=right width=160 alt=logo>
 _A thin wrapper around node-fetch just for JSON_
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/node-fetch-json/blob/master/LICENSE.txt)
