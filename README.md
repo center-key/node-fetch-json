@@ -114,7 +114,8 @@ Notes:
 1. The `resource` object is turned into the body of the HTTP request.
 1. The `options` parameter is passed through to **node-fetch** (see the **node-fetch** documentation for supported **[options](https://www.npmjs.com/package/node-fetch#options)**).
 
-If you need to programmatically set the HTTP method, use the format:
+#### Dynamic HTTP method
+If you need to programmatically set the method, use the format:
 ```javascript
 fetchJson.request(method, url, data, options).then(callback);
 ```
