@@ -1,6 +1,7 @@
 # node-fetch-json
 <img src=https://raw.githubusercontent.com/center-key/node-fetch-json/master/logos.png
-   align=right width=160 alt=logo>
+   align=right width=200 alt=logo>
+
 _A thin wrapper around node-fetch just for JSON_
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/node-fetch-json/blob/master/LICENSE.txt)
@@ -112,6 +113,13 @@ Notes:
 1. The `params` object for `fetchJson.get()` is converted into a query string and appended to the `url`.
 1. The `resource` object is turned into the body of the HTTP request.
 1. The `options` parameter is passed through to **node-fetch** (see the **node-fetch** documentation for supported **[options](https://www.npmjs.com/package/node-fetch#options)**).
+
+If you need to programmatically set the HTTP method, use the format:
+```javascript
+fetchJson.request(method, url, data, options).then(callback);
+```
+Where `method` is `'GET'`, `'POST'`, `'PUT'`, `'PATCH'`, or `'DELETE'`, and `data` represents
+either `params` or `resource`.
 
 ### E) Questions or enhancements
 Feel free to submit an [issue](https://github.com/center-key/node-fetch-json/issues).
