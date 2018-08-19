@@ -85,11 +85,7 @@ The **node-fetch-json** module automatically:
 1. Runs `.json()` on the response from the promise.
 
 ### E) API
-Import **node-fetch-json**:
-```javascript
-const fetchJson = require('node-fetch-json');
-```
-Use **node-fetch-json**:
+The format for using **node-fetch-json** is:
 #### GET
 ```javascript
 fetchJson.get(url, params, options).then(callback);
