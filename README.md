@@ -25,7 +25,6 @@ const fetchJson = require('node-fetch-json');
 ```
 
 ### B) Examples
-
 #### HTTP GET
 Fetch the NASA Astronomy Picture of the Day:
 ```javascript
@@ -53,12 +52,11 @@ fetchJson.post('https://httpbin.org/post', resource)
 ```
 
 ### C) Leverages node-fetch
-
 **node-fetch-json** depends on and calls **[node-fetch](https://www.npmjs.com/package/node-fetch)**.
 
 For comparison, the above POST example to create a planet would be done directly using **node-fetch** with the code:
 ```javascript
-// Create Jupiter
+// Create Jupiter (with node-fetch instead of node-fetch-json)
 const fetch =    require('node-fetch');
 const resource = { name: 'Jupiter', position: 5 };
 const options = {
@@ -77,7 +75,6 @@ fetch('https://httpbin.org/post', options)
    .then(handleData)
    .catch(console.error);
 ```
-
 The examples for **node-fetch-json** and **node-fetch** each produce the same output.
 
 ### D) Details
@@ -87,7 +84,12 @@ The **node-fetch-json** module automatically:
 1. Builds the URL query string from the `params` object for GET requests.
 1. Runs `.json()` on the response from the promise.
 
-The format for using **node-fetch-json** is:
+### E) API
+Import **node-fetch-json**:
+```javascript
+const fetchJson = require('node-fetch-json');
+```
+Use **node-fetch-json**:
 #### GET
 ```javascript
 fetchJson.get(url, params, options).then(callback);
@@ -122,7 +124,7 @@ fetchJson.request(method, url, data, options).then(callback);
 Where `method` is `'GET'`, `'POST'`, `'PUT'`, `'PATCH'`, or `'DELETE'`, and `data` represents
 either `params` or `resource`.
 
-### E) Questions or enhancements
+### F) Questions or enhancements
 Feel free to submit an [issue](https://github.com/center-key/node-fetch-json/issues).
 
 ---
