@@ -37,6 +37,7 @@ function newWay() {
       console.log('NEW: node-fetch-json -->', data.origin, data.json);
       // console.log(data);  //HTTP response body as an object literal
       }
+   fetchJson.enableLogger();
    fetchJson.post('https://httpbin.org/post', resource)
       .then(handleData)
       .catch(console.error);

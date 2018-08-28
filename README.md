@@ -14,7 +14,9 @@ _A thin wrapper around node-fetch just for JSON_
 
 Why would you fetch anything but json? ;)
 
-### A) Setup
+For a browser version, see: [browser-fetch-json](https://www.npmjs.com/package/browser-fetch-json)
+
+### 1) Setup
 Install with the command:
 ```shell
 $ npm install node-fetch-json
@@ -24,7 +26,7 @@ Then import with the line:
 const fetchJson = require('node-fetch-json');
 ```
 
-### B) Examples
+### 2) Examples
 #### HTTP GET
 Fetch the NASA Astronomy Picture of the Day:
 ```javascript
@@ -51,7 +53,7 @@ fetchJson.post('https://httpbin.org/post', resource)
    .catch(console.error);
 ```
 
-### C) Leverages node-fetch
+### 3) Leverages node-fetch
 **node-fetch-json** depends on and calls **[node-fetch](https://www.npmjs.com/package/node-fetch)**.
 
 For comparison, the above POST example to create a planet would be done directly using **node-fetch** with the code:
@@ -77,14 +79,14 @@ fetch('https://httpbin.org/post', options)
 ```
 The examples for **node-fetch-json** and **node-fetch** each produce the same output.
 
-### D) Details
+### 4) Details
 The **node-fetch-json** module automatically:
 1. Serializes the body payload with `JSON.stringify()`.
 1. Adds the JSON data type (`'application/json'`) to the HTTP headers.
 1. Builds the URL query string from the `params` object for GET requests.
 1. Runs `.json()` on the response from the promise.
 
-### E) API
+### 5) API
 The format for using **node-fetch-json** is:
 #### GET
 ```javascript
@@ -92,7 +94,7 @@ fetchJson.get(url, params, options).then(callback);
 ```
 #### POST
 ```javascript
-fetchJson.post(url, resource, options]).then(callback);
+fetchJson.post(url, resource, options).then(callback);
 ```
 #### PUT
 ```javascript
@@ -120,7 +122,14 @@ fetchJson.request(method, url, data, options).then(callback);
 Where `method` is `'GET'`, `'POST'`, `'PUT'`, `'PATCH'`, or `'DELETE'`, and `data` represents
 either `params` or `resource`.
 
-### F) Questions or enhancements
+#### Logging
+Enable basic logging to the console with:
+```javascript
+fetchJson.enableLogger();
+```
+Pass in a function to use a custom logger or pass in `false` to disable logging.
+
+### 6) Questions or enhancements
 Feel free to submit an [issue](https://github.com/center-key/node-fetch-json/issues).
 
 ---
