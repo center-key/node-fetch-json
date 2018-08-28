@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Spec Runner
 
 # To make this file runnable:
