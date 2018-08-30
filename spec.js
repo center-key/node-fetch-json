@@ -49,7 +49,7 @@ describe('NASA Astronomy Picture of the Day resource fetched by fetchJson.get()'
          done();
          }
       fetchJson.get(url, params).then(handleData);
-      }).timeout(5000);
+      }).timeout(5000);  //Deep Space Network can be a little slow
 
    });
 
@@ -204,7 +204,7 @@ describe('Function fetchJson.enableLogger()', () => {
       assert.deepEqual(actual, expected);
       });
 
-   it('passes a timestamp, methed, and url to a custom logger on GET', (done) => {
+   it('passes a timestamp, methed, and URL to a custom logger on GET', (done) => {
       const url = 'https://httpbin.org/get';
       const isoTimestampLength = new Date().toISOString().length;
       function customLogger(logTimestamp, logMethod, logUrl) {

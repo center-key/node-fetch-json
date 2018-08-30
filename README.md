@@ -14,8 +14,6 @@ _A thin wrapper around node-fetch just for JSON_
 
 Why would you fetch anything but json? ;)
 
-For a browser version, see: [browser-fetch-json](https://www.npmjs.com/package/browser-fetch-json)
-
 ### 1) Setup
 Install with the command:
 ```shell
@@ -112,7 +110,7 @@ Notes:
 1. Only the `url` parameter is required.&nbsp;  The other parameters are optional.
 1. The `params` object for `fetchJson.get()` is converted into a query string and appended to the `url`.
 1. The `resource` object is turned into the body of the HTTP request.
-1. The `options` parameter is passed through to **node-fetch** (see the **node-fetch** documentation for supported **[options](https://www.npmjs.com/package/node-fetch#options)**).
+1. The `options` parameter is passed through to **node-fetch** (see the **node-fetch** documentation for supported **[options](https://github.com/bitinn/node-fetch#options)**).
 
 #### Dynamic HTTP method
 If you need to programmatically set the method, use the format:
@@ -129,7 +127,10 @@ fetchJson.enableLogger();
 ```
 Pass in a function to use a custom logger or pass in `false` to disable logging.
 
-### 6) Questions or enhancements
+### 6) Related
+[browser-fetch-json](https://github.com/center-key/browser-fetch-json) -- A version for web browsers
+
+### 7) Questions or enhancements
 Feel free to submit an [issue](https://github.com/center-key/node-fetch-json/issues).
 
 ---
