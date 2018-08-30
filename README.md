@@ -128,7 +128,7 @@ fetchJson.enableLogger();
 Pass in a function to use a custom logger or pass in `false` to disable logging.
 
 ### 6) Related
-[browser-fetch-json](https://github.com/center-key/browser-fetch-json) -- A version for web browsers
+[browser-fetch-json](https://github.com/center-key/browser-fetch-json) - A version for web browsers
 
 ### 7) Questions or enhancements
 Feel free to submit an [issue](https://github.com/center-key/node-fetch-json/issues).
