@@ -1,6 +1,6 @@
 # node-fetch-json
 <img src=https://raw.githubusercontent.com/center-key/node-fetch-json/master/logos.png
-   align=right width=200 alt=logo>
+   align=right width=200 alt=logos>
 
 _A thin wrapper around node-fetch just for JSON_
 
