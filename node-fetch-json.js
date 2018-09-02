@@ -8,7 +8,7 @@ const nodeFetchJson = {
       options = Object.assign(settings, options);
       const jsonHeaders = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
       options.headers = Object.assign(jsonHeaders, options.headers);
-      function toPair(key) { return key + '=' + data[key]; }
+      function toPair(key) { return key + '=' + encodeURIComponent(data[key]); }
       if (options.method === 'GET' && data)
          url = url + (url.includes('?') ? '&' : '?') + Object.keys(data).map(toPair).join('&');
       else if (options.method !== 'GET' && data)
