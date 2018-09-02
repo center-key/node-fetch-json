@@ -7,14 +7,26 @@ const fetchJson = require('./node-fetch-json.js');
 describe('Module node-fetch-json', () => {
 
    it('loads as an object', () => {
-      const actual =   typeof fetchJson;
-      const expected = 'object';
-      assert.equal(actual, expected);
+      const actual =   { module: typeof fetchJson };
+      const expected = { module: 'object' };
+      assert.deepEqual(actual, expected);
       });
 
-   it('has both get() and post() functions', () => {
-      const actual =   { get: typeof fetchJson.get, post: typeof fetchJson.post };
-      const expected = { get: 'function',           post: 'function' };
+   it('has functions for get(), post(), put(), patch(), and delete()', () => {
+      const actual =   {
+         get:    typeof fetchJson.get,
+         post:   typeof fetchJson.post,
+         put:    typeof fetchJson.put,
+         patch:  typeof fetchJson.patch,
+         delete: typeof fetchJson.delete
+         };
+      const expected = {
+         get:    'function',
+         post:   'function',
+         put:    'function',
+         patch:  'function',
+         delete: 'function'
+         };
       assert.deepEqual(actual, expected);
       });
 
@@ -39,12 +51,12 @@ describe('Google Books API search result for "spacex" fetched by fetchJson.get()
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('NASA Astronomy Picture of the Day resource fetched by fetchJson.get()', () => {
 
-   it('contains an image with a URL', (done) => {
+   it('contains a link to media', (done) => {
       const url = 'https://api.nasa.gov/planetary/apod';
       const params = { api_key: 'DEMO_KEY' };
       function handleData(data) {
-         const actual =   { media: data.media_type, url: !!data.url };
-         const expected = { media: 'image',         url: true };
+         const actual =   { media: typeof data.media_type, url: data.url.match(/..../)[0] };
+         const expected = { media: 'string',               url: 'http' };
          assert.deepEqual(actual, expected);
          done();
          }
@@ -59,8 +71,8 @@ describe('GET response returned by httpbin.org', () => {
    it('contains empty params when none are supplied', (done) => {
       const url = 'https://httpbin.org/get';
       function handleData(data) {
-         const actual =   data.args;
-         const expected = { };
+         const actual =   { params: data.args };
+         const expected = { params: {} };
          assert.deepEqual(actual, expected);
          done();
          }
