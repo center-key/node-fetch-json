@@ -1,5 +1,6 @@
 // Mocha Specification Cases
 
+// Imports
 const assert =    require('assert');
 const fetchJson = require('./node-fetch-json.js');
 
@@ -80,10 +81,10 @@ describe('GET response returned by httpbin.org', () => {
       });
 
    it('contains the params from the URL query string', (done) => {
-      const url = 'https://httpbin.org/get?planet=Jupiter&max=3';
+      const url = 'https://httpbin.org/get?planet=Jupiter&position=5';
       function handleData(data) {
          const actual =   data.args;
-         const expected = { planet: 'Jupiter', max: '3' };
+         const expected = { planet: 'Jupiter', position: '5' };
          assert.deepEqual(actual, expected);
          done();
          }
@@ -92,10 +93,10 @@ describe('GET response returned by httpbin.org', () => {
 
    it('contains the params from an object', (done) => {
       const url = 'https://httpbin.org/get';
-      const params = { planet: 'Jupiter', max: 3, tip: 'Big & -148°C' };
+      const params = { planet: 'Jupiter', position: 5, tip: 'Big & -148°C' };
       function handleData(data) {
          const actual =   data.args;
-         const expected = { planet: 'Jupiter', max: '3', tip: 'Big & -148°C' };
+         const expected = { planet: 'Jupiter', position: '5', tip: 'Big & -148°C' };
          assert.deepEqual(actual, expected);
          done();
          }
@@ -104,10 +105,10 @@ describe('GET response returned by httpbin.org', () => {
 
    it('contains the params from both the URL query string and an object', (done) => {
       const url = 'https://httpbin.org/get?sort=diameter';
-      const params = { planet: 'Jupiter', max: 3 };
+      const params = { planet: 'Jupiter', position: 5 };
       function handleData(data) {
          const actual =   data.args;
-         const expected = { sort: 'diameter', planet: 'Jupiter', max: '3' };
+         const expected = { sort: 'diameter', planet: 'Jupiter', position: '5' };
          assert.deepEqual(actual, expected);
          done();
          }
@@ -174,10 +175,10 @@ describe('The low-level fetchJson.request() function', () => {
 
    it('can successfully GET a planet', (done) => {
       const url = 'https://httpbin.org/get';
-      const params = { planet: 'Neptune', max: 10 };
+      const params = { planet: 'Neptune', position: 8 };
       function handleData(data) {
          const actual =   data.args;
-         const expected = { planet: 'Neptune', max: '10' };
+         const expected = { planet: 'Neptune', position: '8' };
          assert.deepEqual(actual, expected);
          done();
          }
