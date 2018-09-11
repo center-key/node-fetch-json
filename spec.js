@@ -248,23 +248,66 @@ describe('HTTP error returned by httpbin.org', () => {
    });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-describe('Result from requesting a web page (text/html)', () => {
+describe('The "bodyText" field of the object returned from requesting', () => {
 
-   it('is an object where the first line of the "bodyText" field is "<!doctype html>"', (done) => {
-      const url = 'https://dnajs.org/';
+   function getFirstLine(string) { return string.split('\n', 1)[0]; }
+
+   it('an HTML web page is a string that begins with "<!DOCTYPE html>"', (done) => {
+      const url = 'https://httpbin.org/html';
       function handleData(data) {
-         const firstLine = data.bodyText.split('\n', 1)[0];
          const actual =   {
             ok:          data.ok,
             status:      [data.status, data.statusText],
             contentType: data.contentType,
-            doctype:     firstLine
+            firstLine:   getFirstLine(data.bodyText)
             };
          const expected = {
             ok:          true,
             status:      [200, 'OK'],
-            contentType: 'text/html',
-            doctype:     '<!doctype html>'
+            contentType: 'text/html; charset=utf-8',
+            firstLine:   '<!DOCTYPE html>'
+            };
+         assert.deepEqual(actual, expected);
+         done();
+         }
+      fetchJson.get(url).then(handleData);
+      });
+
+   it('an XML document is a string that begins with "<!DOCTYPE xml>"', (done) => {
+      const url = 'https://httpbin.org/xml';
+      function handleData(data) {
+         const actual =   {
+            ok:          data.ok,
+            status:      [data.status, data.statusText],
+            contentType: data.contentType,
+            firstLine:   getFirstLine(data.bodyText)
+            };
+         const expected = {
+            ok:          true,
+            status:      [200, 'OK'],
+            contentType: 'application/xml',
+            firstLine:   '<?xml version=\'1.0\' encoding=\'us-ascii\'?>'
+            };
+         assert.deepEqual(actual, expected);
+         done();
+         }
+      fetchJson.get(url).then(handleData);
+      });
+
+   it('a "robots.txt" text file is a string that begins with "User-agent: *"', (done) => {
+      const url = 'https://httpbin.org/robots.txt';
+      function handleData(data) {
+         const actual =   {
+            ok:          data.ok,
+            status:      [data.status, data.statusText],
+            contentType: data.contentType,
+            firstLine:   getFirstLine(data.bodyText)
+            };
+         const expected = {
+            ok:          true,
+            status:      [200, 'OK'],
+            contentType: 'text/plain',
+            firstLine:   'User-agent: *'
             };
          assert.deepEqual(actual, expected);
          done();

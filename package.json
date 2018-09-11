@@ -25,7 +25,7 @@
    },
    "scripts": {
       "pretest": "jshint *.js",
-      "test": "mocha spec.js"
+      "test": "mocha --timeout 10000 spec.js"
    },
    "jshintConfig": {
       "esversion": 6,
