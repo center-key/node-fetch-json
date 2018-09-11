@@ -111,6 +111,7 @@ Notes:
 1. The `params` object for `fetchJson.get()` is converted into a query string and appended to the `url`.
 1. The `resource` object is turned into the body of the HTTP request.
 1. The `options` parameter is passed through to **node-fetch** (see the **node-fetch** documentation for supported **[options](https://github.com/bitinn/node-fetch#options)**).
+1. If the response body is HTML or text, it's converted to JSON.
 
 #### Dynamic HTTP method
 If you need to programmatically set the method, use the format:
@@ -126,6 +127,22 @@ Enable basic logging to the console with:
 fetchJson.enableLogger();
 ```
 Pass in a function to use a custom logger or pass in `false` to disable logging.
+
+#### Text to JSON
+If the HTTP response body is not JSON (`Content-Type` is not `"application/json"` or `"text/javascript"`), an object containing the body as a string in the `bodyText` field is created and passed on through the promise.&nbsp; In addition to the `bodyText` field, the object
+will have fields for: `ok`, `status`, `statusText`, and `contentType`.
+
+For example, an HTTP response for an error status of 500 would be converted to an object
+similar to:
+```javascript
+{
+   ok:          false,
+   status:      500,
+   statusText:  'INTERNAL SERVER ERROR',
+   contentType: 'text/html; charset=utf-8',
+   bodyText:    '<!doctype html><html><body>Server Error</body></html>'
+}
+```
 
 ### 6) Related
 [browser-fetch-json](https://github.com/center-key/browser-fetch-json) - A version for web browsers
