@@ -1,13 +1,13 @@
 {
    "name": "node-fetch-json",
    "description": "A thin wrapper around node-fetch just for JSON",
-   "version": "0.1.8",
+   "version": "0.2.0",
    "license": "MIT",
    "main": "node-fetch-json.js",
    "repository": "github:center-key/node-fetch-json",
-   "homepage": "https://github.com/center-key/node-fetch-json",
-   "bugs": "https://github.com/center-key/node-fetch-json/issues",
-   "docs": "https://github.com/center-key/node-fetch-json/blob/master/README.md",
+   "homepage": "https://github.com/center-key/fetch-json",
+   "bugs": "https://github.com/center-key/fetch-json/issues",
+   "docs": "https://github.com/center-key/fetch-json/blob/master/README.md",
    "keywords": [
       "fetch",
       "get",
