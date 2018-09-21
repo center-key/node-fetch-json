@@ -2,9 +2,12 @@
 
 ## Deprecated
 
-**node-fetch-json** and **browser-fetch-json** have been merged into **fetch-json**
+```
+node-fetch-json + browser-fetch-json => fetch-json
+```
+**node-fetch-json** and **browser-fetch-json** were merged into **fetch-json**
 
-## fetch-json
+## New fetch-json
 
 * GitHub: https://github.com/center-key/fetch-json
 * npm: https://www.npmjs.com/package/fetch-json2
